@@ -1,2 +1,2 @@
-# Monorepo Architecture Example
+# Monorepo Example
 In active development. Not recommended for production.
