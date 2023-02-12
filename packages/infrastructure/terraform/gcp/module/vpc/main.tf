@@ -39,3 +39,7 @@ output "routing_mode" {
 output "gateway_ipv4" {
   value = google_compute_network.vpc_network.gateway_ipv4
 }
+
+output "subnetworks" {
+  value = google_compute_network.vpc_network.subnetworks
+}

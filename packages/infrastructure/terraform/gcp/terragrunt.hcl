@@ -17,6 +17,10 @@ locals {
   environment       = local.environment_vars.locals.environment
   gcp_project       = local.account_vars.locals.gcp_project
   region            = local.region_vars.locals.region
+  region_short      = local.region_vars.locals.region_short
+
+  # Prefix for all resources
+  name_prefix = "${local.organization_name}-${local.region_short}-${local.environment}"
 }
 
 # Generate an AWS provider block
@@ -25,7 +29,7 @@ generate "provider" {
   if_exists = "overwrite_terragrunt"
   contents  = <<EOF
 provider "google" {
-  region      = var.region
+  region      = "${local.region}"
   project     = "${local.gcp_project}"
 }
 EOF
@@ -60,7 +64,7 @@ inputs = merge(
   local.environment_vars.locals,
   {
     # The name of the GCP project
-    gcp_project = "${local.gcp_project}"
+    project_id = "${local.gcp_project}"
 
     # The name of the GCP region
     region = "${local.region}"

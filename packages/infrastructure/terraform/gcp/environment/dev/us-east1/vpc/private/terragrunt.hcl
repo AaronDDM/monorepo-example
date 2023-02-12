@@ -1,33 +1,43 @@
-include "root" {
-  path = find_in_parent_folders()
-}
-
-terraform {
-  source = "${get_path_to_repo_root()}//packages/infrastructure/terraform/gcp/module/vpc"
-}
-
+# Module-specific variables
+# -------------------------
 locals {
-  # Automatically load org-level variables
-  organization_vars = read_terragrunt_config(find_in_parent_folders("organization.hcl"))
-  # Automatically load account-level variables
-  account_vars = read_terragrunt_config(find_in_parent_folders("account.hcl"))
-  # Automatically load region-level variables
-  region_vars = read_terragrunt_config(find_in_parent_folders("region.hcl"))
-  # Automatically load environment-level variables
-  environment_vars = read_terragrunt_config(find_in_parent_folders("environment.hcl"))
-
   # Easily reference the variables
-  organization_name = local.organization_vars.locals.organization_name
-  environment       = local.environment_vars.locals.environment
-  gcp_project       = local.account_vars.locals.gcp_project
-  region            = local.region_vars.locals.region
+  gcp_region        = include.root.locals.region
   
   # Module-specific variables
   vpc_name          = "private"
 }
 
+# Module setup
+# -------------------------
+include "root" {
+  path = find_in_parent_folders()
+  expose = true
+}
+
+terraform {
+  source       = "github.com/terraform-google-modules/terraform-google-network//.?ref=v6.0.1"
+}
+
 inputs = {
-  vpc_name    = "${local.organization_name}-${local.environment}-${local.vpc_name}"
-  region      = "${local.region}"
-  gcp_project = "${local.gcp_project}"
+  network_name = "${include.root.locals.name_prefix}-${local.vpc_name}"
+  mtu          = 1460
+
+  subnets = [
+    {
+      subnet_name   = "services"
+      subnet_ip     = "10.10.10.0/24"
+      subnet_region = "${local.gcp_region}"
+    },
+    # {
+    #   subnet_name               = "subnet-03"
+    #   subnet_ip                 = "10.10.20.0/24"
+    #   subnet_region             = "${local.gcp_region}"
+    #   subnet_flow_logs          = "true"
+    #   subnet_flow_logs_interval = "INTERVAL_10_MIN"
+    #   subnet_flow_logs_sampling = 0.7
+    #   subnet_flow_logs_metadata = "INCLUDE_ALL_METADATA"
+    #   subnet_flow_logs_filter   = "false"
+    # }
+  ]
 }
