@@ -5,7 +5,7 @@ locals {
   gcp_region        = include.root.locals.region
   
   # Module-specific variables
-  vpc_name          = "private"
+  vpc_name          = "${basename(get_terragrunt_dir())}"
 }
 
 # Module setup

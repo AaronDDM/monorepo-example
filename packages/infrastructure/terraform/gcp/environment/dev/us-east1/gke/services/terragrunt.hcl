@@ -1,7 +1,7 @@
 # Module-specific variables
 # -------------------------
 locals {
-  cluster_name = "services"
+  cluster_name = "${basename(get_terragrunt_dir())}"
 }
 
 # Module setup
@@ -18,7 +18,7 @@ terraform {
 # Dependencies
 # -------------------------
 dependency "vpc" {
-  config_path = "../vpc/private"
+  config_path = "../../vpc/private"
 }
 
 inputs = {
