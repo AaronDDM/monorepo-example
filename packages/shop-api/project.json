@@ -1,0 +1,21 @@
+{
+  "root": "packages/shop-api",
+  "sourceRoot": "packages/shop-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go build -o=../../dist/packages/shop-api/ ./src/main.go",
+        "cwd": "packages/cli"
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go run ./src/main.go",
+        "cwd": "packages/shop-api"
+      }
+    }
+  }
+}

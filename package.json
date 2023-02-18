@@ -1,0 +1,24 @@
+{
+  "name": "shop-acme",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "nx": "nx",
+    "start": "nx run-many --target=start",
+    "start:shop-website": "nx start shop-website",
+    "start:shop-api": "nx start shop-api",
+    "build": "nx run-many --target=build",
+    "build:shop-website": "nx build shop-website",
+    "build:shop-api": "nx build shop-api"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nrwl/js": "15.7.2",
+    "@nrwl/nx-cloud": "latest",
+    "@nrwl/workspace": "15.7.2",
+    "nx": "15.7.2",
+    "prettier": "^2.6.2",
+    "typescript": "~4.8.2"
+  }
+}
