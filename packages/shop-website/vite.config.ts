@@ -5,6 +5,9 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig(() => {
   return {
+    build: {
+      outDir: '../../dist/packages/shop-website',
+    },
     plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
     preview: {
       headers: {
