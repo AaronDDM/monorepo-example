@@ -7,7 +7,7 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "go build -o=../../dist/packages/shop-api/ ./src/main.go",
-        "cwd": "packages/cli"
+        "cwd": "packages/shop-api"
       }
     },
     "start": {
