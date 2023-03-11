@@ -7,9 +7,11 @@
     "start": "nx run-many --target=start",
     "start:shop-website": "nx start shop-website",
     "start:shop-api": "nx start shop-api",
+    "start:workflow-api": "nx start workflow-api",
     "build": "nx run-many --target=build",
     "build:shop-website": "nx build shop-website",
-    "build:shop-api": "nx build shop-api"
+    "build:shop-api": "nx build shop-api",
+    "build:workflow-api": "nx build workflow-api"
   },
   "private": true,
   "dependencies": {},

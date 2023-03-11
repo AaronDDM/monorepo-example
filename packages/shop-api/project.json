@@ -6,15 +6,15 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "go build -o=../../dist/packages/shop-api/ ./src/main.go",
-        "cwd": "packages/shop-api"
+        "command": "go build -o=../../../dist/packages/shop-api/ ./main.go",
+        "cwd": "packages/shop-api/src"
       }
     },
     "start": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "go run ./src/main.go",
-        "cwd": "packages/shop-api"
+        "command": "go run main.go",
+        "cwd": "packages/shop-api/src/"
       }
     }
   }
